@@ -1,216 +1,254 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-dark: #111827;
+    --bg-light: #1f2937;
+    --text-primary: #f9fafb;
+    --text-secondary: #9ca3af;
+    --accent-color: #00bcd4;
+    --accent-hover: #0097a7;
+    --accent-secondary: #ff9800;
+    --border-color: #374151;
+    --border-hover: var(--accent-color);
+    --success-color: #22c55e;
+    --error-color: #ef4444;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --font-main: 'Inter', sans-serif;
+    --transition-speed: 0.25s;
+    --icon-color: var(--text-secondary);
+    --icon-accent-color: var(--accent-color);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
 }
 
 h1 {
-    color: #4CAF50;
-    margin-bottom: 30px;
-    font-size: 2.5em;
+    color: var(--text-primary);
+    margin-bottom: 40px;
+    font-size: 2.6em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-align: center;
+    display: inline-flex; /* För att ikonen ska linjera bra */
+    align-items: center;
+    gap: 15px; /* Mellanrum titel/ikon */
 }
 
 .container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
     width: 100%;
-    max-width: 1200px;
 }
 
 .card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 20px;
-
+    background-color: var(--bg-light);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrerar innehållet horisontellt */
-    justify-content: center; /* Centrerar innehållet vertikalt */
-    text-align: center; /* Justerar texten till mitten */
+    transition: transform var(--transition-speed) ease,
+                border-color var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-hover);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.2), var(--card-hover-shadow);
 }
 
 .card h2 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    color: #333;
+    display: flex; align-items: center; gap: 12px; font-size: 1.4em;
+    margin: -30px -30px 25px -30px; padding: 15px 30px; color: var(--text-primary);
+    font-weight: 600; border-bottom: 1px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius) var(--border-radius) 0 0; text-align: left;
+}
+.card h2 .icon, .card h2 .fas {
+     color: var(--icon-accent-color); font-size: 1.1em; width: 20px; text-align: center;
 }
 
-.card form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Justera så att elementen linjerar till vänster */
-    gap: 10px; /* Mellanrum mellan fälten */
-}
+.icon, .fas, .fab, .far { color: var(--icon-color); transition: color var(--transition-speed) ease; line-height: 1; }
+.accent-icon { color: var(--icon-accent-color); }
 
-.card form label {
-    font-size: 1em;
-    margin-bottom: 5px;
-}
+.sensor-card p, .sensor-card .sensor-data { font-size: 1.05em; margin-bottom: 12px; text-align: left; width: 100%; display: flex; align-items: center; gap: 10px; }
+.sensor-card .label { color: var(--text-secondary); min-width: 90px; display: inline-block; flex-shrink: 0; }
+.sensor-card .value { font-weight: 600; color: var(--text-primary); word-break: break-word; }
+.sensor-card .sensor-data i.icon, .sensor-card .sensor-data i.fas { font-size: 1.3em; width: 25px; text-align: center; color: var(--icon-accent-color); margin-right: 5px; flex-shrink: 0; }
 
-.card form input {
-    width: 100%; /* Fyll hela kortets bredd */
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; /* Se till att padding inte påverkar bredd */
-}
+.light-condition-display { justify-content: flex-start; align-items: baseline; }
+.condition-icon { font-size: 1.5em; margin-left: 15px; color: var(--icon-color); transition: color var(--transition-speed) ease, transform var(--transition-speed) ease, opacity var(--transition-speed) ease, text-shadow var(--transition-speed) ease; opacity: 0.3; }
+.condition-icon.active { opacity: 1; transform: scale(1.1); }
+#icon-sun.active { color: #ffeb3b; text-shadow: 0 0 8px #ffeb3b; }
+#icon-moon.active { color: #a7d8ff; text-shadow: 0 0 8px #a7d8ff; }
 
-.card form button {
-    align-self: center; /* Centrera knappen */
-    width: auto; /* Låt knappen ha en naturlig bredd */
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+.action-card .button-group { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; width: 100%; justify-content: center; }
 
-.card form button:hover {
-    background-color: #45a049;
-}
+.servo-control-card .spinner { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0; }
 
-.led-indicator {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-}
+.lighting-card .color-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(95px, 1fr)); gap: 10px; margin-bottom: 25px; }
+.lighting-card .brightness-control { margin: 25px 0; width: 100%; text-align: left; }
+.lighting-card label[for="brightness"] { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: var(--text-secondary); font-weight: 500; }
+.lighting-card label[for="brightness"] i.fas { color: var(--icon-accent-color); font-size: 1.2em; }
+.lighting-card label[for="brightness"] span { font-weight: 600; color: var(--text-primary); background-color: var(--bg-dark); padding: 2px 8px; border-radius: 4px; font-size: 0.95em; }
+.lighting-card .effect-buttons { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 25px; width: 100%; justify-content: center; border-top: 1px solid var(--border-color); padding-top: 25px; }
 
-.led {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: gray;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
+#sendDataForm { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+#sendDataForm label { display: block; font-size: 0.9em; margin-bottom: 4px; color: var(--text-secondary); text-align: left; font-weight: 500; }
+#sendDataForm .form-row { display: flex; align-items: flex-start; gap: 10px; }
+#sendDataForm .input-group { position: relative; width: 100%; flex-grow: 1; }
+#sendDataForm .input-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 1.1em; pointer-events: none; z-index: 1; transition: color var(--transition-speed) ease; }
+#sendDataForm input[type="email"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; box-sizing: border-box; width: 100%; padding: 12px 18px 12px 45px; font-size: 1em; font-family: var(--font-main); border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-dark); color: var(--text-primary); line-height: 1.4; transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed); }
+#sendDataForm input[type="email"]::placeholder { color: var(--text-secondary); opacity: 0.6; }
+#sendDataForm input[type="email"]:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2); background-color: var(--bg-light); }
+#sendDataForm .input-group:focus-within .input-icon { color: var(--accent-color); }
+#sendDataForm .form-row button[type="submit"] { appearance: none; -webkit-appearance: none; -moz-appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 20px; margin: 0; font-size: 1em; font-weight: 600; font-family: var(--font-main); color: #111827; background-color: var(--accent-color); border: 1px solid var(--accent-color); border-radius: var(--border-radius); cursor: pointer; transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; text-decoration: none; white-space: nowrap; line-height: 1.4; flex-shrink: 0; height: calc(1.4em + 24px + 2px); }
+#sendDataForm .form-row button[type="submit"]:hover:not(:disabled) { background-color: var(--accent-hover); border-color: var(--accent-hover); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 188, 212, 0.2); }
+#sendDataForm .form-row button[type="submit"]:active:not(:disabled) { transform: translateY(0px) scale(0.97); box-shadow: none; }
+#sendDataForm .form-row button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; background-color: var(--accent-color) !important; border-color: var(--accent-color) !important; color: #111827 !important;}
+#sendDataForm .form-row button[type="submit"] .fa-spinner { font-size: 1em; }
 
-.led {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: gray; /* Standardfärg för inaktiva lysdioder */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Mindre skugga */
-    transition: all 0.3s ease; /* Smidig övergång */
-}
+.card button { appearance: none; -webkit-appearance: none; -moz-appearance: none; display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; margin: 5px; padding: 10px 20px; font-family: var(--font-main); font-size: 1em; font-weight: 500; border-radius: var(--border-radius); cursor: pointer; background-color: #374151; color: var(--text-primary); line-height: 1.4; text-decoration: none; white-space: nowrap; transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; }
+.card button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
-.led-cold.active {
-    background-color: #0000FF; /* Blå för aktiv Cold LED */
-    box-shadow: 0 0 10px white; /* Glöd för aktiv lysdiod */
-    transform: scale(1.2); /* Förstora aktiv lysdiod */
-}
+.btn .icon, .btn .fas, .btn .fab, .btn .far { font-size: 1.1em; line-height: 1; }
 
-.led-normal.active {
-    background-color: #00FF00; /* Grön för aktiv Normal LED */
-    box-shadow: 0 0 10px white;
-    transform: scale(1.2);
-}
+.servo-control-card button,
+.lighting-card .effect-buttons button { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); gap: 10px; padding: 10px 20px; }
+.servo-control-card button:hover:not(:disabled),
+.lighting-card .effect-buttons button:hover:not(:disabled) { border-color: var(--accent-secondary); color: var(--accent-secondary); background-color: rgba(255, 152, 0, 0.05); transform: translateY(-2px); }
+.servo-control-card button:active:not(:disabled),
+.lighting-card .effect-buttons button:active:not(:disabled){ transform: translateY(0px) scale(0.97); }
+.servo-control-card button:disabled,
+.lighting-card .effect-buttons button:disabled { background-color: transparent !important; border-color: var(--border-color) !important; color: var(--text-secondary) !important;}
 
-.led-hot.active {
-    background-color: #FF0000; /* Röd för aktiv Hot LED */
-    box-shadow: 0 0 10px white;
-    transform: scale(1.2);
-}
+.lighting-card .color-buttons button { background-color: var(--bg-dark); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 12px; font-size: 0.9em; justify-content: flex-start; width: 100%; gap: 8px; }
+.lighting-card .color-buttons button:hover:not(:disabled) { border-color: var(--accent-secondary); color: var(--accent-secondary); background-color: lighten(var(--bg-dark), 5%); transform: none; }
+.lighting-card .color-buttons button:active:not(:disabled){ transform: scale(0.98); }
+.lighting-card .color-buttons button:disabled { background-color: var(--bg-dark) !important; border-color: var(--border-color) !important; color: var(--text-secondary) !important;}
+.color-preview { width: 16px; height: 16px; border-radius: 3px; display: inline-block; border: 1px solid rgba(255, 255, 255, 0.2); flex-shrink: 0; }
 
-.button {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+input[type="range"] { width: 100%; height: 6px; margin: 15px 0; background: var(--border-color); border-radius: 3px; cursor: pointer; -webkit-appearance: none; appearance: none; outline: none; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; border: 3px solid var(--bg-light); margin-top: -7px; transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease; }
+input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: var(--accent-color); border-radius: 50%; cursor: pointer; border: 3px solid var(--bg-light); }
+input[type="range"]:hover::-webkit-slider-thumb { background-color: var(--accent-hover); transform: scale(1.1); }
+input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
 
-.button:hover {
-    background-color: #45a049;
-}
-
-/* Styling för Light Sensor-kortet */
-.light-condition-icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.icon {
-    font-size: 40px;
-    color: gray; /* Standardfärg för inaktiva ikoner */
-    transition: all 0.3s ease; /* Smidig övergång */
-}
-
-.icon.active {
-    color: #FFD700; /* Gul färg för aktiva ikoner */
-    transform: scale(2); /* Förstora aktiv ikon */
-}
-
-.icon.sun {
-    color: #FFD700; /* Solen är gul */
-}
-
-.icon.moon {
-    color: #555; /* Månen är mörkgrå */
-}
-
-input[type="range"] {
-    width: 80%;
-    margin: 20px 0;
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3; /* Ljusgrå kant */
-    border-top: 4px solid #4CAF50; /* Grön färg */
-    border-radius: 50%;
-    animation: none; /* Ingen animation som standard */
-    margin: 20px auto; /* Centrerad under knapparna */
-    transition: transform 0.3s ease-in-out;
-}
-
-.spinner.active {
-    animation: spin 1s linear infinite; /* Starta snurr-animation */
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
+.spinner { width: 28px; height: 28px; border: 3px solid var(--border-color); border-top: 3px solid var(--accent-color); border-radius: 50%; animation: none; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; opacity: 0; visibility: hidden; }
+.spinner.active { animation: spin 0.8s linear infinite; opacity: 1; visibility: visible; }
+@keyframes spin { 0% { transform: translateX(-50%) rotate(0deg); } 100% { transform: translateX(-50%) rotate(360deg); } }
 
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card {
-        width: 90%;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
+    body { padding: 20px 15px; justify-content: flex-start;}
+    h1 { font-size: 2.1em; margin-bottom: 30px; }
+    .container { gap: 20px; }
+    .card { padding: 25px; max-width: 95%; }
+    .card h2 { font-size: 1.3em; gap: 10px; margin: -25px -25px 20px -25px; padding: 12px 25px; }
+    .lighting-card .color-buttons { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); }
+    #sendDataForm .form-row { flex-direction: column; align-items: stretch; gap: 10px;}
+    #sendDataForm .form-row button[type="submit"] { align-self: stretch; width: 100%; margin-top: 5px; height: auto; /* Återställ höjd */ }
+    .action-card .button-group { flex-direction: row; justify-content: space-around; }
+     .action-card .button-group .btn, .action-card .button-group button { width: auto; }
+      .lighting-card .effect-buttons { flex-direction: row; justify-content: space-around; }
+       .lighting-card .effect-buttons .btn, .lighting-card .effect-buttons button { width: auto; flex-grow: 1; margin: 0 5px; }
 }
+
+@media (max-width: 480px) {
+    body { padding: 15px 10px; }
+    h1 { font-size: 1.8em; }
+    .card { padding: 20px; max-width: 100%; }
+    .card h2 { font-size: 1.2em; padding: 10px 20px; margin: -20px -20px 15px -20px;}
+    .card button { padding: 10px 15px; font-size: 0.95em; }
+     .lighting-card .color-buttons { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+     .action-card .button-group { flex-direction: column; align-items: stretch; }
+     .action-card .button-group .btn, .action-card .button-group button { width: 100%; }
+     .lighting-card .effect-buttons { flex-direction: column; align-items: stretch; }
+     .lighting-card .effect-buttons .btn, .lighting-card .effect-buttons button { width: 100%; margin: 5px 0; }
+}
+
+/* --- CSS-Tillägg för Bild-Ikoner --- */
+
+/* Generell styling för bild-ikoner */
+.icon-img {
+    height: 1em;       /* Gör höjden relativ till textstorleken */
+    width: auto;        /* Behåll bildens proportioner */
+    vertical-align: middle; /* Försök linjera vertikalt (justera vid behov) */
+    margin-right: 0.2em; /* Liten marginal till höger om ikonen */
+    display: inline-block; /* För att marginal och linjering ska fungera bra */
+}
+
+/* Specifik styling för bild-ikon i H1 */
+h1 .title-icon {
+    height: 1.1em; /* Gör titelikonen lite större än texten */
+     /* Eventuellt filter för att matcha textfärg om bilden är mörk: */
+    /* filter: invert(90%) brightness(1.5); */
+}
+
+/* Specifik styling för bild-ikoner i H2 (korttitlar) */
+.card h2 .icon-img {
+    height: 1.2em; /* Anpassa storlek för H2 */
+    width: 20px;   /* Behåll samma fasta bredd som FA-ikoner hade för linjering */
+    object-fit: contain; /* Se till att bilden skalas snyggt inom bredden/höjden */
+    /* Eventuellt filter: */
+    /* filter: invert(90%) brightness(1.5); */
+}
+
+/* Specifik styling för bild-ikoner bredvid sensordata */
+.sensor-data .icon-img {
+    height: 1.3em; /* Anpassa storlek för sensor-data */
+    width: 25px;   /* Behåll samma fasta bredd som FA-ikoner hade för linjering */
+    object-fit: contain;
+    margin-right: 5px;
+    /* Eventuellt filter: */
+    /* filter: invert(90%) brightness(1.5); */
+}
+
+/* Färgning av accent-ikoner (om bilden är enfärgad och kan färgas med filter) */
+.icon-img.accent-icon {
+    /* Försök att approximera accentfärgen med filter (experimentera!) */
+    /* Detta är svårt och beror på originalbildens färg */
+    /* filter: invert(58%) sepia(97%) saturate(1441%) hue-rotate(140deg) brightness(95%) contrast(101%); /* Försöker få en teal-färg */
+}
+
+/* VIKTIGT OM FÄRG PÅ BILDER:
+   Att ändra färg på PNG/JPG med CSS är inte optimalt.
+   CSS-filter (som `invert`, `sepia`, `hue-rotate`) kan *försöka* ändra färgen,
+   men resultatet blir sällan perfekt och beror mycket på bildens originalfärg.
+   Om dina ikoner är mörka och behöver vara ljusa (eller tvärtom),
+   är det bästa att antingen:
+     a) Använda bildfiler som redan har rätt färg för ditt tema.
+     b) Redigera bildfilerna i ett bildredigeringsprogram.
+     c) Använda SVG-ikoner istället för PNG (SVG kan stylas med CSS `fill`).
+     d) Gå tillbaka till Font Awesome för de ikoner som behöver dynamisk färg.
+   De kommenterade filter-reglerna ovan är bara exempel och behöver justeras.
+*/

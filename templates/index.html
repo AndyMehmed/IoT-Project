@@ -1,109 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Home Control Center</title>
+    <title>Smart Home Control Center - Bildikoner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Smart Home Control Center</h1>
+    <h1>
+        <img src="{{ url_for('static', filename='icons8-smart-home-50.png') }}" alt="Smart Home Ikon" class="title-icon icon-img">
+        Smart Home Control Center
+    </h1>
     <div class="container">
-        <!-- Temperature and Humidity -->
-        <div class="card">
-            <h2>Temperature and Humidity</h2>
-            <p>Temperature: <span id="temperature">N/A</span></p>
-            <p>Humidity: <span id="humidity">N/A</span></p>
-            <!-- LED Indicators -->
-            <div class="led-indicator">
-                <div class="led led-cold" id="led-cold"></div>
-                <div class="led led-normal" id="led-normal"></div>
-                <div class="led led-hot" id="led-hot"></div>
+        <div class="card sensor-card">
+            <h2><i class="fas fa-thermometer-half icon"></i> Temperature & Humidity</h2>
+            <div class="sensor-data">
+                <i class="fas fa-temperature-low icon accent-icon"></i>
+                <span class="label">Temperature:</span>
+                <span class="value" id="temperature">N/A °C</span>
+            </div>
+            <div class="sensor-data">
+                <img src="{{ url_for('static', filename='icons8-humidity-50.png') }}" alt="Humidity" class="icon-img accent-icon">
+                <span class="label">Humidity:</span>
+                <span class="value" id="humidity">N/A %</span>
             </div>
         </div>
 
-        <!-- Light Sensor -->
-        <div class="card">
-            <h2>Light Sensor</h2>
-            <p>Light Level: <span id="lightSensor">N/A</span></p>
-            <p>Light Condition: <span id="lightCondition"></span></p>
-
-            <!-- Icons for light condition -->
-            <div class="light-condition-icons">
-                <i id="icon-sun" class="icon sun">&#9728;</i> <!-- Solsymbol -->
-                <i id="icon-moon" class="icon moon">&#9790;</i> <!-- Månsymbol -->
+        <div class="card sensor-card">
+             <h2><img src="{{ url_for('static', filename='icons8-light-80.png') }}" alt="Light" class="icon-img"> Light Sensor</h2>
+            <div class="sensor-data">
+                 <i class="fas fa-tachometer-alt icon accent-icon"></i>
+                 <span class="label">Level:</span>
+                 <span class="value" id="lightSensor">N/A</span>
+            </div>
+             <div class="sensor-data light-condition-display">
+                 <span class="label">Condition:</span>
+                 <span class="value" id="lightCondition">N/A</span>
+                 <i id="icon-sun" class="fas fa-sun condition-icon"></i>
+                 <i id="icon-moon" class="fas fa-moon condition-icon"></i>
             </div>
         </div>
 
-        <!-- Servo Motor Control -->
-        <div class="card">
-            <h2>Servo Motor Control</h2>
-            <button class="button" onclick="controlServo(10)">Open Blinds</button>
-            <button class="button" onclick="controlServo(170)">Close Blinds</button>
-            <div id="spinner" class="spinner"></div> <!-- Spinnern -->
+        <div class="card action-card servo-control-card">
+             <h2><i class="fas fa-blinds-open icon"></i> Servo Motor Control</h2>
+            <div class="button-group">
+                <button onclick="controlServo(10)"> <i class="fas fa-blinds-open"></i> Open Blinds</button>
+                <button onclick="controlServo(170)"><i class="fas fa-blinds"></i> Close Blinds</button>
+            </div>
+            <div id="spinner" class="spinner"></div>
         </div>
 
-        <!-- Lighting Control -->
-        <div class="card">
-            <h2>Lighting Control</h2>
-            <button class="button" onclick="setColor('FF0000')">Set NeoPixel Red</button>
-            <button class="button" onclick="setColor('00FF00')">Set NeoPixel Green</button>
-            <button class="button" onclick="setColor('0000FF')">Set NeoPixel Blue</button>
-            <button class="button" onclick="setColor('FFA500')">Set NeoPixel Orange</button>
-            <button class="button" onclick="setColor('800080')">Set NeoPixel Purple</button>
-            <button class="button" onclick="setColor('00FFFF')">Set NeoPixel Cyan</button>
-            <br>
-            <label for="brightness">Brightness:</label>
-            <input type="range" id="brightness" min="1" max="100" value="10" onchange="setBrightness(this.value)">
-            <p>Current Brightness: <span id="currentBrightness">10</span></p>
-            <hr>
-            <button class="button" onclick="startRainbowEffect()">Start Rainbow Effect</button>
-            <button class="button" onclick="startColorCycle()">Start Color Cycle</button>
+        <div class="card action-card lighting-card">
+            <h2><i class="fas fa-palette icon"></i> Lighting Control</h2>
+            <div class="color-buttons">
+                <button onclick="setColor('FF0000')"><span class="color-preview" style="background-color:#FF0000;"></span> Red</button>
+                <button onclick="setColor('00FF00')"><span class="color-preview" style="background-color:#00FF00;"></span> Green</button>
+                <button onclick="setColor('0000FF')"><span class="color-preview" style="background-color:#0000FF;"></span> Blue</button>
+                <button onclick="setColor('FFA500')"><span class="color-preview" style="background-color:#FFA500;"></span> Orange</button>
+                <button onclick="setColor('800080')"><span class="color-preview" style="background-color:#800080;"></span> Purple</button>
+                <button onclick="setColor('00FFFF')"><span class="color-preview" style="background-color:#00FFFF;"></span> Cyan</button>
+            </div>
+            <div class="brightness-control">
+                 <label for="brightness"><i class="fas fa-adjust"></i> Brightness: <span id="currentBrightness">10</span>%</label>
+                <input type="range" id="brightness" min="1" max="100" value="10" oninput="setBrightness(this.value)" onchange="setBrightness(this.value)">
+             </div>
+            <div class="effect-buttons">
+                 <button onclick="startRainbowEffect()"><i class="fas fa-rainbow"></i> Rainbow</button>
+                <button onclick="startColorCycle()"><i class="fas fa-sync-alt"></i> Color Cycle</button>
+            </div>
         </div>
 
-        <!-- Send Data Form -->
-        <div class="card">
-            <h2>Send Data</h2>
+        <div class="card form-card">
+             <h2><img src="{{ url_for('static', filename='icons8-email-80.png') }}" alt="Email" class="icon-img"> Send Data</h2>
             <form id="sendDataForm">
                 <label for="email">Recipient Email:</label>
-                <input type="email" id="email" placeholder="example@example.com" required>
-                <button type="submit" class="button">Send Data</button>
+                <div class="form-row">
+                    <div class="input-group">
+                         <i class="fas fa-at input-icon"></i>
+                         <input type="email" id="email" placeholder="example@example.com" required>
+                    </div>
+                     <button type="submit"><i class="fas fa-paper-plane"></i> Send Data</button>
+                </div>
             </form>
         </div>
+    </div>
 
-        <script>
-            // Uppdatera sensordata och ljusförhållanden
-            setInterval(async () => {
-                try {
-                    const response = await fetch('/sensor-data');
-                    const data = await response.json();
-        
-                    // Uppdatera sensordata
-                    document.getElementById('temperature').innerText = data.temperature || 'N/A';
-                    document.getElementById('humidity').innerText = data.humidity || 'N/A';
-                    document.getElementById('lightSensor').innerText = data.lightSensor || 'N/A';
-        
-                    // Uppdatera LED-status
-                    ['led-cold', 'led-normal', 'led-hot'].forEach((id) => {
-                        document.getElementById(id).classList.remove('active');
-                    });
-        
-                    if (data.activeLED === "Cold LED") {
-                        document.getElementById('led-cold').classList.add('active');
-                    } else if (data.activeLED === "Normal LED") {
-                        document.getElementById('led-normal').classList.add('active');
-                    } else if (data.activeLED === "Hot LED") {
-                        document.getElementById('led-hot').classList.add('active');
-                    }
-        
-                    // Uppdatera ljusförhållanden
-                    const lightConditionElement = document.getElementById('lightCondition');
-                    const sunIcon = document.getElementById('icon-sun');
-                    const moonIcon = document.getElementById('icon-moon');
-        
-                    sunIcon.classList.remove('active');
-                    moonIcon.classList.remove('active');
-        
+    <script>
+       // ... (Samma JS som tidigare) ...
+
+        // Uppdatera sensorvärden och enheter
+        setInterval(async () => {
+            try {
+                const response = await fetch('/sensor-data');
+                const data = await response.json();
+
+                document.getElementById('temperature').innerText = data.temperature !== null ? `${data.temperature} °C` : 'N/A';
+                document.getElementById('humidity').innerText = data.humidity !== null ? `${data.humidity} %` : 'N/A';
+                document.getElementById('lightSensor').innerText = data.lightSensor !== null ? data.lightSensor : 'N/A';
+
+                // Uppdatera ljusförhållanden och ikoner
+                const lightConditionElement = document.getElementById('lightCondition');
+                const sunIcon = document.getElementById('icon-sun');
+                const moonIcon = document.getElementById('icon-moon');
+
+                sunIcon.classList.remove('active');
+                moonIcon.classList.remove('active');
+
+                if (data.lightSensor !== null) {
                     if (data.lightSensor >= 200) {
                         lightConditionElement.innerText = "Bright";
                         sunIcon.classList.add('active');
@@ -111,148 +118,161 @@
                         lightConditionElement.innerText = "Dark";
                         moonIcon.classList.add('active');
                     }
-                } catch (error) {
-                    console.error("Error updating data:", error);
+                } else {
+                     lightConditionElement.innerText = "N/A";
                 }
-            }, 2000);
-        
-            // Kontrollera och styr servo med spinner
-            async function controlServo(angle) {
-                const spinner = document.getElementById('spinner');
-                spinner.classList.add('active'); // Visa spinnern
-        
-                try {
-                    const response = await fetch('/servo', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ angle })
-                    });
-        
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error("Servo Error:", errorData.error);
-                        alert("Error controlling servo: " + errorData.error);
-                    }
-                } catch (error) {
-                    console.error('Error controlling servo:', error);
-                    alert('Error controlling servo. Please try again.');
-                } finally {
-                    setTimeout(() => {
-                        spinner.classList.remove('active'); // Dölj spinnern efter 1 sekund
-                    }, 1000);
-                }
+            } catch (error) {
+                console.error("Error updating data:", error);
+                 document.getElementById('temperature').innerText = 'Error';
+                 document.getElementById('humidity').innerText = 'Error';
+                 document.getElementById('lightSensor').innerText = 'Error';
+                 document.getElementById('lightCondition').innerText = 'Error';
+
             }
-        
-            // Email Notification Settings
-            document.getElementById('sendDataForm').addEventListener('submit', async (event) => {
-                event.preventDefault();
-                const email = document.getElementById('email').value;
-            
-                try {
-                    const response = await fetch('/update-temp-threshold', { // Routen används för att skicka data
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email }) // Endast e-post skickas
-                    });
-            
-                    if (response.ok) {
-                        const data = await response.json();
-                        alert(data.message);
-                    } else {
-                        const errorData = await response.json();
-                        alert('Error: ' + errorData.error);
-                    }
-                } catch (error) {
-                    console.error("Error sending data:", error);
-                    alert("Failed to send data. Please try again.");
-                }
-            });
-        
-            // Ställ in färg
-            async function setColor(color) {
-                try {
-                    await fetch('/neopixel/color', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ color })
-                    });
-                    console.log(`NeoPixel färg satt till #${color}`);
-                } catch (error) {
-                    console.error("Error setting NeoPixel color:", error);
-                }
-            }            
-        
-            // Ställ in ljusstyrka
-            async function setBrightness(brightness) {
-                document.getElementById('currentBrightness').innerText = brightness;
-        
-                try {
-                    const response = await fetch('/neopixel/brightness', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ brightness })
-                    });
-        
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        alert('Error setting brightness: ' + errorData.error);
-                    }
-                } catch (error) {
-                    console.error("Error setting brightness:", error);
-                    alert("Failed to set brightness. Please try again.");
-                }
+        }, 5000);
+
+
+         // Kontrollera och styr servo med spinner
+         async function controlServo(angle) {
+             const spinner = document.getElementById('spinner');
+             const servoCard = spinner.closest('.card');
+             const buttons = servoCard.querySelectorAll('button');
+             spinner.classList.add('active');
+             buttons.forEach(button => button.disabled = true);
+
+             try {
+                 const response = await fetch('/servo', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ angle })
+                 });
+                 if (!response.ok) {
+                     const errorData = await response.json();
+                     console.error("Servo Error:", errorData.error);
+                     alert("Error controlling servo: " + errorData.error);
+                 }
+             } catch (error) {
+                 console.error('Error controlling servo:', error);
+                 alert('Error controlling servo. Please try again.');
+             } finally {
+                 setTimeout(() => {
+                     spinner.classList.remove('active');
+                     buttons.forEach(button => button.disabled = false);
+                 }, 500);
+             }
+         }
+
+         // Email Notification Settings
+         document.getElementById('sendDataForm').addEventListener('submit', async (event) => {
+             event.preventDefault();
+             const emailInput = document.getElementById('email');
+             const email = emailInput.value;
+             const form = emailInput.closest('form');
+             const submitButton = form.querySelector('button[type="submit"]');
+             const originalButtonContent = submitButton.innerHTML;
+
+             submitButton.disabled = true;
+             submitButton.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
+
+             try {
+                 const response = await fetch('/update-temp-threshold', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ email })
+                 });
+
+                 if (response.ok) {
+                     const data = await response.json();
+                     alert(data.message || "Data sent successfully!");
+                     emailInput.value = '';
+                 } else {
+                     const errorData = await response.json();
+                     alert('Error: ' + (errorData.error || 'Unknown error'));
+                 }
+             } catch (error) {
+                 console.error("Error sending data:", error);
+                 alert("Failed to send data. Please try again.");
+             } finally {
+                 submitButton.disabled = false;
+                 submitButton.innerHTML = originalButtonContent;
+             }
+         });
+
+
+        // Funktion för ljusstyrka
+        async function setBrightness(brightness) {
+            const brightnessLabel = document.querySelector('label[for="brightness"]');
+            if (brightnessLabel) {
+                 brightnessLabel.innerHTML = `<i class="fas fa-adjust"></i> Brightness: <span id="currentBrightness">${brightness}</span>%`;
             }
 
-                        // Starta regnbågseffekt
-            async function startRainbowEffect() {
-                const delay = prompt("Enter delay (ms) for rainbow effect (0-100):", 20);
-                if (delay === null) return; // Användaren avbröt prompten
+             try {
+                 const response = await fetch('/neopixel/brightness', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ brightness: parseInt(brightness, 10) })
+                 });
 
-                try {
-                    const response = await fetch('/neopixel/rainbow', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ delay: parseInt(delay, 10) })
-                    });
+                 if (!response.ok) {
+                     const errorData = await response.json();
+                     alert('Error setting brightness: ' + (errorData.error || 'Unknown error'));
+                 }
+             } catch (error) {
+                 console.error("Error setting brightness:", error);
+                 alert("Failed to set brightness. Please try again.");
+             }
+         }
 
-                    if (response.ok) {
-                        const data = await response.json();
-                        alert(data.message);
-                    } else {
-                        const errorData = await response.json();
-                        alert('Error: ' + errorData.error);
-                    }
-                } catch (error) {
-                    console.error("Error starting rainbow effect:", error);
-                    alert("Failed to start rainbow effect. Please try again.");
-                }
-            }
 
-            // Starta färgcykling
-            async function startColorCycle() {
-                const delay = prompt("Enter delay (ms) for color cycle (0-100):", 50);
-                if (delay === null) return; // Användaren avbröt prompten
+        // Ställ in färg
+         async function setColor(color) {
+             try {
+                 await fetch('/neopixel/color', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ color })
+                 });
+                 console.log(`NeoPixel color set to #${color}`);
+             } catch (error) {
+                 console.error("Error setting NeoPixel color:", error);
+             }
+         }
 
-                try {
-                    const response = await fetch('/neopixel/cycle', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ delay: parseInt(delay, 10) })
-                    });
+         // Starta regnbågseffekt
+         async function startRainbowEffect() {
+             const delayInput = prompt("Enter delay (ms) for rainbow effect (e.g., 20):", "20");
+             if (delayInput === null) return;
+             const delay = parseInt(delayInput, 10);
+              if (isNaN(delay)) { alert("Invalid delay. Please enter a number."); return; }
 
-                    if (response.ok) {
-                        const data = await response.json();
-                        alert(data.message);
-                    } else {
-                        const errorData = await response.json();
-                        alert('Error: ' + errorData.error);
-                    }
-                } catch (error) {
-                    console.error("Error starting color cycle:", error);
-                    alert("Failed to start color cycle. Please try again.");
-                }
-            }
+             try {
+                 const response = await fetch('/neopixel/rainbow', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ delay })
+                 });
+                  if (!response.ok) { const errorData = await response.json(); throw new Error(errorData.error || 'Unknown error'); }
+                  alert("Rainbow effect started!");
+             } catch (error) { console.error("Error starting rainbow effect:", error); alert(`Failed to start rainbow effect: ${error.message}`); }
+         }
 
-        </script>                
+         // Starta färgcykling
+         async function startColorCycle() {
+             const delayInput = prompt("Enter delay (ms) for color cycle (e.g., 50):", "50");
+             if (delayInput === null) return;
+             const delay = parseInt(delayInput, 10);
+              if (isNaN(delay)) { alert("Invalid delay. Please enter a number."); return; }
+
+             try {
+                 const response = await fetch('/neopixel/cycle', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ delay })
+                 });
+                  if (!response.ok) { const errorData = await response.json(); throw new Error(errorData.error || 'Unknown error'); }
+                  alert("Color cycle started!");
+             } catch (error) { console.error("Error starting color cycle:", error); alert(`Failed to start color cycle: ${error.message}`); }
+         }
+    </script>
 </body>
 </html>
