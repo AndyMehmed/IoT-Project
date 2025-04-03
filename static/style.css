@@ -52,9 +52,9 @@ h1 {
     font-weight: 700;
     letter-spacing: -0.5px;
     text-align: center;
-    display: inline-flex; /* För att ikonen ska linjera bra */
+    display: inline-flex;
     align-items: center;
-    gap: 15px; /* Mellanrum titel/ikon */
+    gap: 15px;
 }
 
 .container {
@@ -176,7 +176,7 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
     .card h2 { font-size: 1.3em; gap: 10px; margin: -25px -25px 20px -25px; padding: 12px 25px; }
     .lighting-card .color-buttons { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); }
     #sendDataForm .form-row { flex-direction: column; align-items: stretch; gap: 10px;}
-    #sendDataForm .form-row button[type="submit"] { align-self: stretch; width: 100%; margin-top: 5px; height: auto; /* Återställ höjd */ }
+    #sendDataForm .form-row button[type="submit"] { align-self: stretch; width: 100%; margin-top: 5px; height: auto; }
     .action-card .button-group { flex-direction: row; justify-content: space-around; }
      .action-card .button-group .btn, .action-card .button-group button { width: auto; }
       .lighting-card .effect-buttons { flex-direction: row; justify-content: space-around; }
@@ -196,59 +196,28 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
      .lighting-card .effect-buttons .btn, .lighting-card .effect-buttons button { width: 100%; margin: 5px 0; }
 }
 
-/* --- CSS-Tillägg för Bild-Ikoner --- */
-
-/* Generell styling för bild-ikoner */
+/* --- CSS-Tillägg för Bild-Ikoner (Rensad) --- */
 .icon-img {
-    height: 1em;       /* Gör höjden relativ till textstorleken */
-    width: auto;        /* Behåll bildens proportioner */
-    vertical-align: middle; /* Försök linjera vertikalt (justera vid behov) */
-    margin-right: 0.2em; /* Liten marginal till höger om ikonen */
-    display: inline-block; /* För att marginal och linjering ska fungera bra */
+    height: 1em;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 0.2em;
+    display: inline-block;
 }
-
-/* Specifik styling för bild-ikon i H1 */
 h1 .title-icon {
-    height: 1.1em; /* Gör titelikonen lite större än texten */
-     /* Eventuellt filter för att matcha textfärg om bilden är mörk: */
-    /* filter: invert(90%) brightness(1.5); */
+    height: 1.1em;
 }
-
-/* Specifik styling för bild-ikoner i H2 (korttitlar) */
 .card h2 .icon-img {
-    height: 1.2em; /* Anpassa storlek för H2 */
-    width: 20px;   /* Behåll samma fasta bredd som FA-ikoner hade för linjering */
-    object-fit: contain; /* Se till att bilden skalas snyggt inom bredden/höjden */
-    /* Eventuellt filter: */
-    /* filter: invert(90%) brightness(1.5); */
+    height: 1.2em;
+    width: 20px;
+    object-fit: contain;
 }
-
-/* Specifik styling för bild-ikoner bredvid sensordata */
 .sensor-data .icon-img {
-    height: 1.3em; /* Anpassa storlek för sensor-data */
-    width: 25px;   /* Behåll samma fasta bredd som FA-ikoner hade för linjering */
+    height: 1.3em;
+    width: 25px;
     object-fit: contain;
     margin-right: 5px;
-    /* Eventuellt filter: */
-    /* filter: invert(90%) brightness(1.5); */
 }
-
-/* Färgning av accent-ikoner (om bilden är enfärgad och kan färgas med filter) */
 .icon-img.accent-icon {
-    /* Försök att approximera accentfärgen med filter (experimentera!) */
-    /* Detta är svårt och beror på originalbildens färg */
-    /* filter: invert(58%) sepia(97%) saturate(1441%) hue-rotate(140deg) brightness(95%) contrast(101%); /* Försöker få en teal-färg */
+    /* Inga filter appliceras som standard */
 }
-
-/* VIKTIGT OM FÄRG PÅ BILDER:
-   Att ändra färg på PNG/JPG med CSS är inte optimalt.
-   CSS-filter (som `invert`, `sepia`, `hue-rotate`) kan *försöka* ändra färgen,
-   men resultatet blir sällan perfekt och beror mycket på bildens originalfärg.
-   Om dina ikoner är mörka och behöver vara ljusa (eller tvärtom),
-   är det bästa att antingen:
-     a) Använda bildfiler som redan har rätt färg för ditt tema.
-     b) Redigera bildfilerna i ett bildredigeringsprogram.
-     c) Använda SVG-ikoner istället för PNG (SVG kan stylas med CSS `fill`).
-     d) Gå tillbaka till Font Awesome för de ikoner som behöver dynamisk färg.
-   De kommenterade filter-reglerna ovan är bara exempel och behöver justeras.
-*/
